@@ -115,6 +115,7 @@ const Profile = () => {
                             <p className="name info-el">{userData.name} {userData.surname}</p>
                             <p className="info-el">Телефон: {userData.phone}</p>
                             <p className="info-el">Филиал: {userData.selectedFilial}</p>
+                            <p className="info-el">Личный номер: {userData.personalId}</p>
                             <p className="info-el">Создан: {formatDate(userData.createdAt)}</p>
 
                             <div className="password-field-profile">
