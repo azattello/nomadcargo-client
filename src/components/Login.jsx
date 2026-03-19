@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./styles/login.css";
 import phonePNG from "../assets/img/phone.png";
 import passwdPNG from "../assets/img/passwd.png";
@@ -12,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const role = useSelector(state => state.user.currentUser?.role);
 
   const handleLogin = async () => {
     const loginSuccess = await dispatch(login(phone, password));
@@ -21,7 +22,13 @@ const Login = () => {
         await pushNotificationUtil.requestPermission();
         await pushNotificationUtil.registerServiceWorker();
       }
-      navigate("/main");
+      
+      // Редирект в зависимости от роли
+      if (role === 'admin' || role === 'filial') {
+        navigate("/dashboard");
+      } else {
+        navigate("/main");
+      }
     }
   };
 

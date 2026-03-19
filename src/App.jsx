@@ -16,7 +16,8 @@ import { auth } from "./action/user";
 import { useSelector } from 'react-redux';
 import NotFound from "./components/NotFound";
 import Referral from "./components/Referral";
-import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
+import ClientRoute from "./components/ClientRoute";
 import AnnouncementManager from "./components/AnnouncementManager";
 // Pages
 import Bonuses from './components/pages/Bonuses';
@@ -65,27 +66,29 @@ function App() {
         <Route path="/login" element={isAuth ? <Navigate to="/main" /> : <Login />} />
         <Route path="/registration" element={isAuth ? <Navigate to="/main" /> : <Registration />} />
         
-        {/* Защищенные маршруты (доступны только авторизованным пользователям) */}
-        <Route path="/main" element={<ProtectedRoute><Main /></ProtectedRoute>} />
-        <Route path="/parcels" element={<ProtectedRoute><Parcels /></ProtectedRoute>} />
-        <Route path="/notification" element={<ProtectedRoute><Notification /></ProtectedRoute>} />
-        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/lost" element={<ProtectedRoute><LostClient /></ProtectedRoute>} />
-        <Route path="/referral" element={<ProtectedRoute><Referral /></ProtectedRoute>} />
-        <Route path="/archive" element={<ProtectedRoute><ArchivePage /></ProtectedRoute>} />
+        {/* Защищенные маршруты для обычных пользователей (клиентов) */}
+        <Route path="/main" element={<ClientRoute><Main /></ClientRoute>} />
+        <Route path="/parcels" element={<ClientRoute><Parcels /></ClientRoute>} />
+        <Route path="/notification" element={<ClientRoute><Notification /></ClientRoute>} />
+        <Route path="/profile" element={<ClientRoute><Profile /></ClientRoute>} />
+        <Route path="/lost" element={<ClientRoute><LostClient /></ClientRoute>} />
+        <Route path="/referral" element={<ClientRoute><Referral /></ClientRoute>} />
+        <Route path="/archive" element={<ClientRoute><ArchivePage /></ClientRoute>} />
 
-        {/* Pages for main menu (защищенные) */}
-        <Route path="/bonus" element={<ProtectedRoute><Bonuses /></ProtectedRoute>} />
-        <Route path="/filials" element={<ProtectedRoute><Filials /></ProtectedRoute>} />
-        <Route path="/invoices" element={<ProtectedRoute><Invoices /></ProtectedRoute>} />
-        <Route path="/warehouse" element={<ProtectedRoute><Warehouse /></ProtectedRoute>} />
-        <Route path="/qr" element={<ProtectedRoute><QRPage /></ProtectedRoute>} />
-        <Route path="/terms" element={<ProtectedRoute><Terms /></ProtectedRoute>} />
-        <Route path="/contacts" element={<ProtectedRoute><Contacts /></ProtectedRoute>} />
-        <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-        <Route path="/manager" element={<ProtectedRoute><Manager /></ProtectedRoute>} />
-        <Route path="/admin/announcements" element={<ProtectedRoute><AnnouncementManager /></ProtectedRoute>} />
+        {/* Pages для клиентов (защищенные) */}
+        <Route path="/bonus" element={<ClientRoute><Bonuses /></ClientRoute>} />
+        <Route path="/filials" element={<ClientRoute><Filials /></ClientRoute>} />
+        <Route path="/invoices" element={<ClientRoute><Invoices /></ClientRoute>} />
+        <Route path="/warehouse" element={<ClientRoute><Warehouse /></ClientRoute>} />
+        <Route path="/qr" element={<ClientRoute><QRPage /></ClientRoute>} />
+        <Route path="/terms" element={<ClientRoute><Terms /></ClientRoute>} />
+        <Route path="/contacts" element={<ClientRoute><Contacts /></ClientRoute>} />
+        <Route path="/settings" element={<ClientRoute><Settings /></ClientRoute>} />
+        <Route path="/manager" element={<ClientRoute><Manager /></ClientRoute>} />
+        
+        {/* Защищенные маршруты для админов (админка) */}
+        <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />
+        <Route path="/admin/announcements" element={<AdminRoute><AnnouncementManager /></AdminRoute>} />
         
         {/* Обработка всех остальных маршрутов */}
         <Route path="*" element={<NotFound />} />
