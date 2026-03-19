@@ -14,6 +14,7 @@ import Lost from "./Lost";
 import PartnerProgramAdmin from "./PartnerProgramAdmin";
 import FooterMbl from "./FooterMbl";
 import AnnouncementManager from "../AnnouncementManager";
+import GlobalIdCounterStatus from "./GlobalIdCounterStatus";
 
 const Dashboard = () => {
   const [selectedNavItem, setSelectedNavItem] = useState(sessionStorage.getItem('selectedNavItem') || "addTrack");
@@ -53,6 +54,7 @@ const Dashboard = () => {
           {selectedNavItem === "myCargo" && <MyCargo />}
           {selectedNavItem === "mailing" && <PartnerProgramAdmin />}
           {selectedNavItem === "Announcements" && <AnnouncementManager />}
+          {selectedNavItem === "globalIdCounter" && <GlobalIdCounterStatus />}
           
         </div>
         

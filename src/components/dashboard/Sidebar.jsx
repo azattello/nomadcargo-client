@@ -7,6 +7,7 @@ import users from '../../assets/img/users.png';
 import truck from '../../assets/img/truck.png';
 import lost from '../../assets/img/lost.png'
 import logo from '../../assets/img/logo.jpg'
+import apps from '../../assets/img/apps.png'
 
 import config from "../../config";
 import { useSelector } from "react-redux";
@@ -91,6 +92,14 @@ const Sidebar = ({ onNavItemClick }) => {
           <div className={`nav-link ${selectedNavItem === "Announcements" && "nav-active"}`} onClick={() => handleNavItemClick("Announcements")}>
             <img src={lost} alt="" className="nav-icon" />
             <h5 className="nav-title">Объявления</h5>
+            <div></div>
+          </div>
+          }
+
+          {role === 'admin' && 
+          <div className={`nav-link ${selectedNavItem === "globalIdCounter" && "nav-active"}`} onClick={() => handleNavItemClick("globalIdCounter")}>
+            <img src={apps} alt="" className="nav-icon" />
+            <h5 className="nav-title">Счётчик ID</h5>
             <div></div>
           </div>
           }
